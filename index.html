@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>myecomm - Your Ultimate Online Shopping Destination</title>
+
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    <link rel="preconnect" href="https://image.pollinations.ai">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Custom Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: 'var(--primary-color)',
+                        accent: 'var(--accent-color)',
+                        'light-bg': 'var(--light-background)',
+                        'dark-text': 'var(--dark-text)',
+                        'light-text': 'var(--light-text)',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        poppins: ['Poppins', 'sans-serif'],
+                    },
+                    gradientColorStops: theme => ({
+                        ...theme('colors'),
+                        'purple-start': '#4A2B6A',
+                        'purple-end': '#6B4C8A', /* Slightly lighter purple */
+                        'orange-start': '#FF7D00',
+                        'orange-end': '#FFA040', /* Slightly lighter orange */
+                    })
+                }
+            }
+        }
+    </script>
+    <!-- Custom Styles -->
+    <style>
+        :root {
+            --primary-color: #4A2B6A; /* Deep Purple */
+            --accent-color: #FF7D00; /* Vibrant Orange */
+            --light-background: #F9FAFB;
+            --dark-text: #1F2937;
+            --light-text: #F3F4F6;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark-text);
+            background-color: var(--light-background);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            color: var(--primary-color);
+            margin-bottom: 0.5em;
+        }
+    </style>
+</head>
+<body class="bg-light-bg text-dark-text antialiased">
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-3 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="flex items-center space-x-2">
+                <i class="fas fa-shopping-bag text-primary text-3xl"></i>
+                <span class="text-3xl font-bold font-poppins text-primary">myecomm</span>
+            </a>
+
+            <!-- Mobile Menu Button -->
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-primary focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#" class="text-lg font-medium hover:text-accent transition duration-300">Home</a>
+                <a href="#shop" class="text-lg font-medium hover:text-accent transition duration-300">Shop</a>
+                <a href="#categories" class="text-lg font-medium hover:text-accent transition duration-300">Categories</a>
+                <a href="#offers" class="text-lg font-medium hover:text-accent transition duration-300">Offers</a>
+                <a href="#contact" class="text-lg font-medium hover:text-accent transition duration-300">Contact</a>
+            </div>
+
+            <!-- Icons -->
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="#" class="text-primary hover:text-accent text-xl relative">
+                    <i class="fas fa-search"></i>
+                </a>
+                <a href="#" class="text-primary hover:text-accent text-xl relative">
+                    <i class="fas fa-heart"></i>
+                    <span class="absolute -top-1 -right-2 bg-accent text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">3</span>
+                </a>
+                <a href="#" class="text-primary hover:text-accent text-xl relative">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="absolute -top-1 -right-2 bg-accent text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">5</span>
+                </a>
+                <a href="#" class="text-primary hover:text-accent text-xl">
+                    <i class="fas fa-user-circle"></i>
+                </a>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white py-4 px-4 shadow-md">
+            <a href="#" class="block py-2 text-lg font-medium text-dark-text hover:text-accent">Home</a>
+            <a href="#shop" class="block py-2 text-lg font-medium text-dark-text hover:text-accent">Shop</a>
+            <a href="#categories" class="block py-2 text-lg font-medium text-dark-text hover:text-accent">Categories</a>
+            <a href="#offers" class="block py-2 text-lg font-medium text-dark-text hover:text-accent">Offers</a>
+            <a href="#contact" class="block py-2 text-lg font-medium text-dark-text hover:text-accent">Contact</a>
+            <div class="pt-4 border-t border-gray-200 mt-4 flex justify-around">
+                 <a href="#" class="text-primary hover:text-accent text-xl relative">
+                    <i class="fas fa-search"></i>
+                </a>
+                <a href="#" class="text-primary hover:text-accent text-xl relative">
+                    <i class="fas fa-heart"></i>
+                    <span class="absolute -top-1 -right-2 bg-accent text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">3</span>
+                </a>
+                <a href="#" class="text-primary hover:text-accent text-xl relative">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="absolute -top-1 -right-2 bg-accent text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">5</span>
+                </a>
+                <a href="#" class="text-primary hover:text-accent text-xl">
+                    <i class="fas fa-user-circle"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="relative bg-gradient-to-r from-purple-start to-purple-end text-white py-16 md:py-24 overflow-hidden">
+            <div class="absolute inset-0 z-0 opacity-20">
+                <img src="https://image.pollinations.ai/prompt/ecommerce%20fashion%20futuristic%20cityscape%20vibrant%20neon%20lights?width=1920&height=1080&nologo=true"
+                     alt="Hero Background"
+                     class="w-full h-full object-cover">
+            </div>
+            <div class="container mx-auto px-4 relative z-10 flex flex-col md:flex-row items-center gap-8">
+                <div class="md:w-1/2 text-center md:text-left">
+                    <h1 class="text-4xl md:text-6xl font-poppins font-bold leading-tight mb-4 drop-shadow-lg">
+                        Unleash Your Style. Explore Infinite Possibilities.
+                    </h1>
+                    <p class="text-lg md:text-xl mb-8 opacity-90 max-w-lg mx-auto md:mx-0">
+                        Discover the latest trends and exclusive deals on everything you love. myecomm makes shopping effortless and enjoyable.
+                    </p>
+                    <a href="#shop" class="inline-block bg-accent hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-full text-lg transition duration-300 shadow-lg transform hover:scale-105">
+                        Shop Now <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                <div class="md:w-1/2 flex justify-center md:justify-end mt-8 md:mt-0">
+                    <img src="https://image.pollinations.ai/prompt/stylish%20woman%20shopping%20with%20bags%20online%20futuristic%20vibrant%20colors?width=600&height=600&nologo=true"
+                         alt="Shopping Girl"
+                         class="w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 object-cover rounded-full shadow-2xl border-4 border-white transform hover:rotate-3 transition duration-500 ease-in-out">
+                </div>
+            </div>
+        </section>
+
+        <!-- Categories Section -->
+        <section id="categories" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl md:text-4xl font-poppins font-bold text-center mb-12">Shop by Category</h2>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                    <!-- Category Card 1 -->
+                    <a href="#" class="group block relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-2 bg-light-bg">
+                        <img src="https://image.pollinations.ai/prompt/modern%20fashion%20clothing%20store%20stylish?width=400&height=300&nologo=true"
+                             alt="Fashion" class="w-full h-48 object-cover group-hover:scale-105 transition duration-500" loading="lazy" decoding="async">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60 group-hover:opacity-70 transition duration-300"></div>
+                        <div class="absolute bottom-4 left-4 text-white">
+                            <h3 class="text-xl font-poppins font-semibold">Fashion</h3>
+                            <p class="text-sm opacity-90">Trending styles</p>
+                        </div>
+                    </a>
+                    <!-- Category Card 2 -->
+                    <a href="#" class="group block relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-2 bg-light-bg">
+                        <img src="https://image.pollinations.ai/prompt/electronics%20gadgets%20tech%20store?width=400&height=300&nologo=true"
+                             alt="Electronics" class="w-full h-48 object-cover group-hover:scale-105 transition duration-500" loading="lazy" decoding="async">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60 group-hover:opacity-70 transition duration-300"></div>
+                        <div class="absolute bottom-4 left-4 text-white">
+                            <h3 class="text-xl font-poppins font-semibold">Electronics</h3>
+                            <p class="text-sm opacity-90">Cutting-edge tech</p>
+                        </div>
+                    </a>
+                    <!-- Category Card 3 -->
+                    <a href="#" class="group block relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-2 bg-light-bg">
+                        <img src="https://image.pollinations.ai/prompt/home%20decor%20furniture%20modern%20interior?width=400&height=300&nologo=true"
+                             alt="Home & Living" class="w-full h-48 object-cover group-hover:scale-105 transition duration-500" loading="lazy" decoding="async">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60 group-hover:opacity-70 transition duration-300"></div>
+                        <div class="absolute bottom-4 left-4 text-white">
+                            <h3 class="text-xl font-poppins font-semibold">Home & Living</h3>
+                            <p class="text-sm opacity-90">Comfort for your space</p>
+                        </div>
+                    </a>
+                    <!-- Category Card 4 -->
+                    <a href="#" class="group block relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-2 bg-light-bg">
+                        <img src="https://image.pollinations.ai/prompt/beauty%20makeup%20skincare%20products%20aesthetic?width=400&height=300&nologo=true"
+                             alt="Beauty" class="w-full h-48 object-cover group-hover:scale-105 transition duration-500" loading="lazy" decoding="async">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60 group-hover:opacity-70 transition duration-300"></div>
+                        <div class="absolute bottom-4 left-4 text-white">
+                            <h3 class="text-xl font-poppins font-semibold">Beauty</h3>
+                            <p class="text-sm opacity-90">Radiant you</p>
+                        </div>
+                    </a>
+                    <!-- Category Card 5 -->
+                    <a href="#" class="group block relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-2 bg-light-bg">
+                        <img src="https://image.pollinations.ai/prompt/sports%20fitness%20equipment%20dynamic?width=400&height=300&nologo=true"
+                             alt="Sports & Outdoors" class="w-full h-48 object-cover group-hover:scale-105 transition duration-500" loading="lazy" decoding="async">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60 group-hover:opacity-70 transition duration-300"></div>
+                        <div class="absolute bottom-4 left-4 text-white">
+                            <h3 class="text-xl font-poppins font-semibold">Sports & Outdoors</h3>
+                            <p class="text-sm opacity-90">Adventure awaits</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Products Section -->
+        <section id="shop" class="py-16 md:py-24 bg-light-bg">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl md:text-4xl font-poppins font-bold text-center mb-12">Featured Products</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                    <!-- Product Card 1 -->
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden group hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
+                        <div class="relative">
+                            <img src="https://image.pollinations.ai/prompt/stylish%20smartwatch%20sleek%20design%20futuristic?width=600&height=400&nologo=true"
+                                 alt="Smartwatch X1" class="w-full h-56 object-cover group-hover:scale-105 transition duration-500" loading="lazy" decoding="async">
+                            <span class="absolute top-3 left-3 bg-primary text-white text-xs font-semibold px-2 py-1 rounded-full">New</span>
+                            <button class="absolute top-3 right-3 bg-white p-2 rounded-full text-primary hover:text-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <i class="far fa-heart"></i>
+                            </button>
+                        </div>
+                        <div class="p-5">
+                            <h3 class="text-xl font-poppins font-semibold text-primary mb-2">Smartwatch X1 Pro</h3>
+                            <p class="text-gray-600 mb-3 line-clamp-2">Track your fitness, notifications, and style with this advanced smartwatch.</p>
+                            <div class="flex items-center mb-3">
+                                <span class="text-yellow-400 text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></span>
+                                <span class="text-gray-500 text-sm ml-2">(4.0)</span>
+                            </div>
+                            <div class="flex items-baseline justify-between mb-4">
+                                <span class="text-2xl font-bold text-accent">$199.99</span>
+                                <span class="text-gray-500 line-through text-sm">$249.99</span>
+                            </div>
+                            <button class="w-full bg-primary hover:bg-purple-end text-white font-semibold py-3 px-4 rounded-lg transition duration-300 transform hover:scale-105">
+                                Add to Cart <i class="fas fa-shopping-cart ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Product Card 2 -->
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden group hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
+                        <div class="relative">
+                            <img src="https://image.pollinations.ai/prompt/designer%20leather%20handbag%20elegant%20luxury?width=600&height=400&nologo=true"
+                                 alt="Elegant Handbag" class="w-full h-56 object-cover group-hover:scale-105 transition duration-500" loading="lazy" decoding="async">
+                            <span class="absolute top-3 left-3 bg-accent text-white text-xs font-semibold px-2 py-1 rounded-full">-20%</span>
+                            <button class="absolute top-3 right-3 bg-white p-2 rounded-full text-primary hover:text-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <i class="far fa-heart"></i>
+                            </button>
+                        </div>
+                        <div class="p-5">
+                            <h3 class="text-xl font-poppins font-semibold text-primary mb-2">Chic Leather Handbag</h3>
+                            <p class="text-gray-600 mb-3 line-clamp-2">A timeless accessory crafted from premium leather, perfect for any occasion.</p>
+                            <div class="flex items-center mb-3">
+                                <span class="text-yellow-400 text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span>
+                                <span class="text-gray-500 text-sm ml-2">(4.5)</span>
+                            </div>
+                            <div class="flex items-baseline justify-between mb-4">
+                                <span class="text-2xl font-bold text-accent">$79.99</span>
+                                <span class="text-gray-500 line-through text-sm">$99.99</span>
+                            </div>
+                            <button class="w-full bg-primary hover:bg-purple-end text-white font-semibold py-3 px-4 rounded-lg transition duration-300 transform hover:scale-105">
+                                Add to Cart <i class="fas fa-shopping-cart ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Product Card 3 -->
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden group hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
+                        <div class="relative">
+                            <img src="https://image.pollinations.ai/prompt/wireless%20noise%20cancelling%20headphones%20sleek%20audio?width=600&height=400&nologo=true"
+                                 alt="Noise Cancelling Headphones" class="w-full h-56 object-cover group-hover:scale-105 transition duration-500" loading="lazy" decoding="async">
+                            <button class="absolute top-3 right-3 bg-white p-2 rounded-full text-primary hover:text-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <i class="far fa-heart"></i>
+                            </button>
+                        </div>
+                        <div class="p-5">
+                            <h3 class="text-xl font-poppins font-semibold text-primary mb-2">Aura ANC Headphones</h3>
+                            <p class="text-gray-600 mb-3 line-clamp-2">Immerse yourself in pure sound with advanced noise cancellation technology.</p>
+                            <div class="flex items-center mb-3">
+                                <span class="text-yellow-400 text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+                                <span class="text-gray-500 text-sm ml-2">(5.0)</span>
+                            </div>
+                            <div class="flex items-baseline justify-between mb-4">
+                                <span class="text-2xl font-bold text-accent">$149.00</span>
+                            </div>
+                            <button class="w-full bg-primary hover:bg-purple-end text-white font-semibold py-3 px-4 rounded-lg transition duration-300 transform hover:scale-105">
+                                Add to Cart <i class="fas fa-shopping-cart ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Product Card 4 -->
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden group hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
+                        <div class="relative">
+                            <img src="https://image.pollinations.ai/prompt/ergonomic%20office%20chair%20modern%20design%20comfort?width=600&height=400&nologo=true"
+                                 alt="Ergonomic Office Chair" class="w-full h-56 object-cover group-hover:scale-105 transition duration-500" loading="lazy" decoding="async">
+                            <span class="absolute top-3 left-3 bg-primary text-white text-xs font-semibold px-2 py-1 rounded-full">Bestseller</span>
+                            <button class="absolute top-3 right-3 bg-white p-2 rounded-full text-primary hover:text-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <i class="far fa-heart"></i>
+                            </button>
+                        </div>
+                        <div class="p-5">
+                            <h3 class="text-xl font-poppins font-semibold text-primary mb-2">ErgoComfort Office Chair</h3>
+                            <p class="text-gray-600 mb-3 line-clamp-2">Experience ultimate comfort and support with this adjustable ergonomic chair.</p>
+                            <div class="flex items-center mb-3">
+                                <span class="text-yellow-400 text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></span>
+                                <span class="text-gray-500 text-sm ml-2">(4.2)</span>
+                            </div>
+                            <div class="flex items-baseline justify-between mb-4">
+                                <span class="text-2xl font-bold text-accent">$299.00</span>
+                            </div>
+                            <button class="w-full bg-primary hover:bg-purple-end text-white font-semibold py-3 px-4 rounded-lg transition duration-300 transform hover:scale-105">
+                                Add to Cart <i class="fas fa-shopping-cart ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mt-12">
+                    <a href="#" class="inline-block bg-accent hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-full text-lg transition duration-300 shadow-lg transform hover:scale-105">
+                        View All Products <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Promotional Banner Section -->
+        <section id="offers" class="py-16 md:py-24 bg-gradient-to-br from-primary to-purple-end text-white">
+            <div class="container mx-auto px-4 flex flex-col md:flex-row items-center justify-center gap-10">
+                <div class="md:w-1/2 text-center md:text-left">
+                    <h2 class="text-4xl md:text-5xl font-poppins font-bold leading-tight mb-4 drop-shadow-lg">
+                        Limited Time Offer: Get 30% Off!
+                    </h2>
+                    <p class="text-lg md:text-xl mb-8 opacity-90 max-w-lg mx-auto md:mx-0">
+                        Don't miss out on our exclusive flash sale. Upgrade your tech, refresh your wardrobe, or decorate your home.
+                    </p>
+                    <a href="#" class="inline-block bg-white text-primary hover:bg-gray-100 font-bold py-3 px-8 rounded-full text-lg transition duration-300 shadow-lg transform hover:scale-105">
+                        Explore Deals <i class="fas fa-tags ml-2"></i>
+                    </a>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <img src="https://image.pollinations.ai/prompt/sale%20banner%20products%20shopping%20cart%20discount%20futuristic%20vibrant?width=600&height=400&nologo=true"
+                         alt="Discount Banner"
+                         class="w-full max-w-md rounded-xl shadow-2xl transform rotate-3 hover:rotate-0 transition duration-500 ease-in-out" loading="lazy" decoding="async">
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl md:text-4xl font-poppins font-bold text-center mb-12">What Our Customers Say</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Testimonial Card 1 -->
+                    <div class="bg-gradient-to-br from-white to-light-bg rounded-lg p-8 shadow-xl border border-gray-100 hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
+                        <div class="flex items-center mb-4">
+                            <img src="https://image.pollinations.ai/prompt/professional%20portrait%20smiling%20businesswoman?width=100&height=100&nologo=true"
+                                 alt="Client 1" class="w-16 h-16 rounded-full object-cover mr-4 border-2 border-accent" loading="lazy" decoding="async">
+                            <div>
+                                <h4 class="font-poppins font-semibold text-primary text-lg">Sarah M.</h4>
+                                <span class="text-yellow-500 text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 italic">"myecomm has completely changed my online shopping experience. The range of products is incredible, and the delivery is always super fast. Highly recommended!"</p>
+                    </div>
+                    <!-- Testimonial Card 2 -->
+                    <div class="bg-gradient-to-br from-white to-light-bg rounded-lg p-8 shadow-xl border border-gray-100 hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
+                        <div class="flex items-center mb-4">
+                            <img src="https://image.pollinations.ai/prompt/professional%20portrait%20smiling%20man%20tech?width=100&height=100&nologo=true"
+                                 alt="Client 2" class="w-16 h-16 rounded-full object-cover mr-4 border-2 border-accent" loading="lazy" decoding="async">
+                            <div>
+                                <h4 class="font-poppins font-semibold text-primary text-lg">David L.</h4>
+                                <span class="text-yellow-500 text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 italic">"I'm always impressed by the quality of products and the seamless checkout process. myecomm is my go-to for all my tech and gadget needs. Fantastic customer support too!"</p>
+                    </div>
+                    <!-- Testimonial Card 3 -->
+                    <div class="bg-gradient-to-br from-white to-light-bg rounded-lg p-8 shadow-xl border border-gray-100 hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
+                        <div class="flex items-center mb-4">
+                            <img src="https://image.pollinations.ai/prompt/professional%20portrait%20happy%20woman%20fashion?width=100&height=100&nologo=true"
+                                 alt="Client 3" class="w-16 h-16 rounded-full object-cover mr-4 border-2 border-accent" loading="lazy" decoding="async">
+                            <div>
+                                <h4 class="font-poppins font-semibold text-primary text-lg">Jessica P.</h4>
+                                <span class="text-yellow-500 text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 italic">"The fashion collection is always up-to-date and unique. myecomm offers stylish clothes at great prices. My wardrobe has never looked better, thanks to them!"</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Signup / Call to Action -->
+        <section class="py-16 bg-gradient-to-r from-accent to-orange-end text-white">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="text-3xl md:text-4xl font-poppins font-bold mb-4 drop-shadow-lg">Stay Updated with myecomm!</h2>
+                <p class="text-lg mb-8 opacity-90 max-w-xl mx-auto">
+                    Subscribe to our newsletter for exclusive offers, new product alerts, and personalized recommendations.
+                </p>
+                <form class="max-w-md mx-auto flex flex-col sm:flex-row gap-4">
+                    <input type="email" placeholder="Enter your email address"
+                           class="flex-grow py-3 px-6 rounded-full border-2 border-white bg-transparent text-white placeholder-white focus:outline-none focus:ring-2 focus:ring-white transition duration-300">
+                    <button type="submit"
+                            class="bg-white text-accent hover:bg-gray-100 font-bold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105 shadow-md">
+                        Subscribe <i class="fas fa-envelope ml-2"></i>
+                    </button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-primary text-white py-12">
+        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
+            <!-- About myecomm -->
+            <div>
+                <a href="#" class="flex items-center space-x-2 mb-4">
+                    <i class="fas fa-shopping-bag text-white text-3xl"></i>
+                    <span class="text-3xl font-bold font-poppins text-white">myecomm</span>
+                </a>
+                <p class="text-gray-300 text-sm leading-relaxed">
+                    myecomm is your premier online destination for fashion, electronics, home goods, and more. We bring the world's best products to your fingertips.
+                </p>
+            </div>
+
+            <!-- Quick Links -->
+            <div>
+                <h3 class="text-xl font-poppins font-semibold mb-4">Quick Links</h3>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="hover:text-accent transition duration-300">About Us</a></li>
+                    <li><a href="#shop" class="hover:text-accent transition duration-300">Shop All</a></li>
+                    <li><a href="#categories" class="hover:text-accent transition duration-300">Categories</a></li>
+                    <li><a href="#" class="hover:text-accent transition duration-300">Privacy Policy</a></li>
+                    <li><a href="#" class="hover:text-accent transition duration-300">Terms of Service</a></li>
+                </ul>
+            </div>
+
+            <!-- Customer Service -->
+            <div>
+                <h3 class="text-xl font-poppins font-semibold mb-4">Customer Service</h3>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="hover:text-accent transition duration-300">Contact Us</a></li>
+                    <li><a href="#" class="hover:text-accent transition duration-300">FAQ</a></li>
+                    <li><a href="#" class="hover:text-accent transition duration-300">Order Tracking</a></li>
+                    <li><a href="#" class="hover:text-accent transition duration-300">Returns & Refunds</a></li>
+                    <li><a href="#" class="hover:text-accent transition duration-300">Shipping Info</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact Info & Social -->
+            <div>
+                <h3 class="text-xl font-poppins font-semibold mb-4">Get in Touch</h3>
+                <ul class="space-y-2 text-sm">
+                    <li><i class="fas fa-map-marker-alt mr-2 text-accent"></i> 123 myecomm Street, City, Country</li>
+                    <li><i class="fas fa-phone mr-2 text-accent"></i> +1 (234) 567-8900</li>
+                    <li><i class="fas fa-envelope mr-2 text-accent"></i> support@myecomm.com</li>
+                </ul>
+                <div class="flex space-x-4 mt-6">
+                    <a href="#" class="text-gray-300 hover:text-accent transition duration-300 text-2xl"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="text-gray-300 hover:text-accent transition duration-300 text-2xl"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-gray-300 hover:text-accent transition duration-300 text-2xl"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-gray-300 hover:text-accent transition duration-300 text-2xl"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400 text-sm">
+            &copy; 2023 myecomm. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Close mobile menu when a link is clicked
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+    <!-- Analytics Injection (CRITICAL) -->
+    <script src="https://alphasite.saadsafi.dev/tracker.js" async></script>
+</body>
+</html>
